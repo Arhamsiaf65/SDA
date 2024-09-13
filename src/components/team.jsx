@@ -39,15 +39,15 @@ function Team() {
         <div ref={sectionRef}>
             <section className="py-24 bg-gray-50">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center flex-col lg:flex-row md:mt-20">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-start md:mt-20">
                         <motion.div
-                            className="w-full lg:w-1/2"
-                            initial={{ x: -50, y: -70, opacity: 0 }} 
-                            animate={{ x: isVisible ? 0 : -50, y: isVisible ? 0 : -30, opacity: isVisible ? 1 : 0 }} 
+                            className="w-full lg:w-1/2 mb-12 lg:mb-0"
+                            initial={{ x: -50, opacity: 0 }} 
+                            animate={{ x: isVisible ? 0 : -50, opacity: isVisible ? 1 : 0 }} 
                             transition={{ duration: 1.2, ease: 'easeOut' }} 
                         >
                             <h2 className="font-manrope text-5xl text-gray-900 font-bold leading-[4rem] mb-7 text-center lg:text-left">
-                                Our leading, strong & creative team
+                                Our Leading, Strong & Creative Team
                             </h2>
                             <p className="text-lg text-gray-500 md:mb-16 text-center lg:text-left">
                                 Our dedicated medical team is committed to providing exceptional care tailored to your needs.
@@ -55,8 +55,8 @@ function Team() {
                                 right to your doorstep. Trust our skilled professionals to ensure your health and well-being with
                                 personalized and compassionate care.
                             </p>
-                            <button className="cursor-pointer py-3 px-8 w-60 bg-[#177D6B] text-white text-base font-semibold transition-all duration-500 block text-center rounded-full mx-auto lg:mx-0 m-10 md:mb-0">
-                                Join our team
+                            <button className="py-3 px-8 w-60 bg-[#177D6B] text-white text-base font-semibold transition-transform duration-500 hover:scale-105 block text-center rounded-full mx-auto lg:mx-0">
+                                Join Our Team
                             </button>
                         </motion.div>
 
@@ -74,16 +74,19 @@ function Team() {
                                     <motion.div
                                         key={index}
                                         ref={ref}
-                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.9 }}
                                         transition={{ duration: 0.6, ease: 'easeOut' }}
-                                        className="relative overflow-hidden rounded-2xl"
+                                        className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
                                     >
                                         <img
                                             src={src}
-                                            alt={`Team image ${index + 1}`}
-                                            className="w-44 h-56 rounded-2xl object-cover transform transition-transform duration-300 hover:scale-110 mx-auto"
+                                            alt={`Team member ${index + 1}`}
+                                            className="w-full h-56 rounded-2xl object-cover transform transition-transform duration-300 hover:scale-105"
                                         />
+                                        <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-lg font-bold">
+                                            <p>Team Member {index + 1}</p>
+                                        </div>
                                     </motion.div>
                                 );
                             })}
