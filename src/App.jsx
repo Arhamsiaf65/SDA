@@ -13,14 +13,13 @@ import Footer from './components/footer';
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.5, // Duration of the scroll animation
-      easing: (t) => t * (2 - t), // Easing function
-      smoothWheel: true, // Smooth scrolling for mouse wheel
-      smoothTouch: true, // Smooth scrolling for touch devices
-      lerp: 0.2, // Interpolation factor for smooth scrolling
+      duration: 1.5, 
+      easing: (t) => t * (2 - t), 
+      smoothWheel: true, 
+      smoothTouch: true, 
+      lerp: 0.2,
     });
 
-    // Handle scroll animation
     const handleScroll = (time) => {
       lenis.raf(time);
       requestAnimationFrame(handleScroll);
