@@ -94,7 +94,6 @@ function Hero() {
   const [showPopup, setShowPopup] = useState(false);
   const timeoutRef = useRef(null);
 
-  // Separate useInView hooks for each animated div
   const { ref: heroRef, inView: heroInView } = useInView({
     triggerOnce: false,
     threshold: 0.5,
@@ -104,6 +103,14 @@ function Hero() {
     triggerOnce: false,
     threshold: 0.5,
   });
+
+  useEffect(() => {
+    timeoutRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(timeoutRef.current);
+  }, []);
 
   useEffect(() => {
     const randomPopupInterval = setInterval(() => {
@@ -117,6 +124,17 @@ function Hero() {
     return () => clearInterval(randomPopupInterval);
   }, [showPopup]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (heroRef.current && !heroRef.current.contains(event.target)) {
+        setShowPopup(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [heroRef]);
+
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
@@ -126,7 +144,7 @@ function Hero() {
   };
 
   return (
-    <SanSarif className="relative w-full h-[100vh] overflow-hidden">
+    <SanSarif className="relative w-full h-[93vh] md:h-[100vh] overflow-hidden">
       <img
         src={images[currentIndex].src}
         className="absolute inset-0 w-full h-full object-cover"
