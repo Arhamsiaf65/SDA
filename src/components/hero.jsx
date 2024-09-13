@@ -13,9 +13,10 @@ const SanSarif = styled.div`
 
 const PopupContainer = styled.div`
   position: absolute;
+  margin-top: 40px;
   bottom: 10px;
   left: 10px;
-  z-index: 50;
+  z-index: 100;
 `;
 
 const Popup = styled(motion.div)`
@@ -35,7 +36,7 @@ const InfoIcon = styled(FaInfoCircle)`
   color: white;
   cursor: pointer;
   background: white;
-  border-radius: 50%; 
+  border-radius: 50%;
   transition: color 0.3s ease;
   &:hover {
     color: #00B4A1;
@@ -48,8 +49,8 @@ const images = [
     alt: "Medical Consultation",
     text: "Expert Medical Consultation",
     subtitle: "Receive personalized medical care and expert advice tailored to your specific needs.",
-    buttonText1: "Learn More",
-    buttonText2: "Contact Us"
+    buttonText1: "Contact Us",
+    buttonText2: "Learn More"
   },
   {
     src: "https://img.freepik.com/premium-photo/innovations-healthcare-catering-needs-adults-groups_1214173-42630.jpg?w=826",
@@ -117,8 +118,6 @@ function Hero() {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
   };
 
- 
-
   return (
     <SanSarif className="relative w-full h-[100vh] overflow-hidden">
       <img
@@ -143,7 +142,7 @@ function Hero() {
           <button className="bg-gradient-to-r from-[#098487] to-[#00B4A1] text-white text-sm md:text-lg font-semibold border-2 border-transparent rounded-full px-6 md:px-8 py-2 md:py-3 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-white hover:text-[#e9fcfc] hover:border-[#098487] hover:shadow-xl">
             {images[currentIndex].buttonText1}
           </button>
-          <button className="bg-white text-[#098487] text-sm md:text-lg font-semibold border-2 border-[#098487] rounded-full px-6 md:px-8 py-2 md:py-3 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-[#098487] hover:text-white hover:shadow-xl">
+          <button className="hidden md:block bg-white text-[#098487] text-sm md:text-lg font-semibold border-2 border-[#098487] rounded-full px-6 md:px-8 py-2 md:py-3 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-[#098487] hover:text-white hover:shadow-xl">
             {images[currentIndex].buttonText2}
           </button>
         </div>
@@ -173,8 +172,6 @@ function Hero() {
           </Popup>
         )}
       </PopupContainer>
-
-      
     </SanSarif>
   );
 }
