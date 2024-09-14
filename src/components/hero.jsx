@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FaInfoCircle } from 'react-icons/fa';
+import { FaWhatsapp, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 
 const SanSarif = styled.div`
   font-family: "Quicksand", sans-serif;
@@ -11,46 +10,67 @@ const SanSarif = styled.div`
   font-style: normal;
 `;
 
-const PopupContainer = styled.div`
+const ActionLineContainer = styled.div`
   position: absolute;
-  margin-top: 40px;
-  bottom: 10px;
-  left: 10px;
+  bottom: 2rem; /* Adjust based on your needs */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
   z-index: 100;
+  width: 80%; /* Make it responsive */
+  max-width: 500px; /* Limit max width for larger screens */
 `;
 
-const Popup = styled(motion.div)`
+const Line = styled.div`
+  height: 2px;
+  width: 100%; 
+  background-color: #098487;
+  position: relative;
+`;
+
+const ActionIcon = styled.a`
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
   background-color: white;
-  color: black;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-`;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-const WhatsAppIcon = styled.a`
-    position: fixed;
-    bottom: 16px; 
-    left: 16px; 
-    z-index: 1000; 
-    background-color: white; 
-    border-radius: 50%;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #128C7E;
+  }
+
+  svg {
+    color: #098487;
+    width: 20px; /* Adjust icon size */
+    height: 20px;
+    transition: color 0.3s ease;
 
     &:hover {
-        background-color: #128C7E;
+      color: white;
     }
-
-    img {
-        width: 40px; 
-        height: 40px;
-    }
+  }
 `;
 
+// Position icons along the line with responsiveness
+const ActionIconWhatsapp = styled(ActionIcon)`
+  left: calc(20% - 12.5px);
+`;
 
+const ActionIconEmail = styled(ActionIcon)`
+  left: calc(50% - 12.5px);
+`;
 
+const ActionIconPhone = styled(ActionIcon)`
+  left: calc(80% - 12.5px);
+`;
 
 const images = [
   {
@@ -79,77 +99,38 @@ const images = [
   }
 ];
 
-const popups = [
-  {
-    message: "Special Offer: Get a free health checkup with your first consultation!",
-    buttonText: "Claim Offer",
-    link: "/offer"
-  },
-  {
-    message: "Tip of the Day: Stay hydrated for better health!",
-    buttonText: "Learn More",
-    link: "/health-tips"
-  },
-  {
-    message: "New Service: Online consultations are now available!",
-    buttonText: "Book Now",
-    link: "/online-consultation"
-  }
-];
-
 function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [popup, setPopup] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
   const timeoutRef = useRef(null);
 
-  const { ref: heroRef, inView: heroInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
-  const { ref: popupRef, inView: popupInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
-  useEffect(() => {
+  const resetInterval = () => {
+    if (timeoutRef.current) {
+      clearInterval(timeoutRef.current);
+    }
     timeoutRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000);
+  };
 
+  useEffect(() => {
+    resetInterval();
     return () => clearInterval(timeoutRef.current);
   }, []);
 
-  useEffect(() => {
-    const randomPopupInterval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * popups.length);
-      setPopup(popups[randomIndex]);
-      setShowPopup(true);
-
-      setTimeout(() => setShowPopup(false), 5000);
-    }, 5000);
-
-    return () => clearInterval(randomPopupInterval);
-  }, [showPopup]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (heroRef.current && !heroRef.current.contains(event.target)) {
-        setShowPopup(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [heroRef]);
-
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
+      resetInterval();
+      return newIndex;
+    });
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
+      resetInterval();
+      return newIndex;
+    });
   };
 
   return (
@@ -160,16 +141,15 @@ function Hero() {
         alt={images[currentIndex].alt}
       />
       <motion.div
-        ref={heroRef}
         initial={{ y: -30, opacity: 0 }}
-        animate={{ y: heroInView ? 0 : 100, opacity: heroInView ? 1 : 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70 p-6 text-center"
       >
-        <h1 className="text-white text-3xl md:text-4xl lg:text-6xl font-bold mb-2 transition-transform duration-500 transform hover:scale-105">
+        <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
           {images[currentIndex].text}
         </h1>
-        <p className="text-gray-300 text-base md:text-lg lg:text-xl mb-4 mx-4 md:mx-10 lg:mx-20 transition-opacity duration-500">
+        <p className="text-gray-300 text-base md:text-lg lg:text-xl mb-4 mx-4 md:mx-8 lg:mx-16">
           {images[currentIndex].subtitle}
         </p>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
@@ -182,7 +162,20 @@ function Hero() {
         </div>
       </motion.div>
 
-      <div className="absolute bottom-5 right-5 flex space-x-7">
+      <ActionLineContainer>
+        <Line />
+        <ActionIconWhatsapp href="https://wa.me/03091849279" target="_blank" rel="noopener noreferrer">
+          <FaWhatsapp />
+        </ActionIconWhatsapp>
+        <ActionIconEmail href="mailto:arhamsaif65@gmail.com">
+          <FaEnvelope />
+        </ActionIconEmail>
+        <ActionIconPhone href="tel:+923091849279">
+          <FaPhoneAlt />
+        </ActionIconPhone>
+      </ActionLineContainer>
+
+      <div className="absolute bottom-5 right-3 md:right-5 flex  space-x-60  md:space-x-7">
         <button onClick={handlePrev} className="text-white text-lg md:text-xl lg:text-2xl shadow-md transition-transform transform hover:scale-105">
           <i className="fas fa-chevron-left"></i>
         </button>
@@ -190,25 +183,6 @@ function Hero() {
           <i className="fas fa-chevron-right"></i>
         </button>
       </div>
-
-      <PopupContainer>
-        {showPopup && popup && (
-          <Popup
-            ref={popupRef}
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: popupInView ? 0 : 100, opacity: popupInView ? 1 : 0 }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-          >
-            <p className="mb-2 font-bold">{popup.message}</p>
-            <a href={popup.link} className="text-[#098487] font-semibold underline">
-              {popup.buttonText}
-            </a>
-          </Popup>
-        )}
-      </PopupContainer>
-      <WhatsAppIcon href="https://wa.me/03091849279" target="_blank" rel="noopener noreferrer">
-                <img src="https://static-00.iconduck.com/assets.00/whatsapp-icon-2038x2048-5zk5gj1j.png" alt="" />
-            </WhatsAppIcon>
     </SanSarif>
   );
 }
