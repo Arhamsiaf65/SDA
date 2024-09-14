@@ -16,9 +16,9 @@ function HeroSection() {
     const text = "At Doctors Corner, we offer top-notch medical care tailored to your individual needs. Our expert team is here to provide everything from routine check-ups to advanced treatments. Discover how our personalized approach can help you achieve better health. Book a free consultation today and start your journey to wellness with us.";
 
     const { ref: sectionRef, inView: isVisible } = useInView({
-        triggerOnce: false, // Set to true if you want it to trigger only once
-        threshold: 0.1,     // Adjust this based on when you want to trigger the visibility
-        rootMargin: '0px'   // Adjust the root margin if needed
+        triggerOnce: true, // Set to true to trigger only once
+        threshold: 0.1,    // Adjust this based on when you want to trigger the visibility
+        rootMargin: '0px'  // Adjust the root margin if needed
     });
 
     return (

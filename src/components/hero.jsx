@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -11,8 +9,6 @@ const SanSarif = styled.div`
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
-  position: relative;
-  overflow: hidden;
 `;
 
 const PopupContainer = styled.div`
@@ -30,7 +26,6 @@ const Popup = styled(motion.div)`
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
-  pointer-events: auto;
 `;
 
 const InfoIcon = styled(FaInfoCircle)`
@@ -48,24 +43,6 @@ const InfoIcon = styled(FaInfoCircle)`
   }
 `;
 
-
-function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [popup, setPopup] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
-  const timeoutRef = useRef(null);
-
-  const { ref: heroRef, inView: heroInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
-  const { ref: popupRef, inView: popupInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
-  
 const images = [
   {
     src: "https://cdn.pixabay.com/photo/2024/07/08/16/28/ai-generated-8881542_1280.jpg",
@@ -111,6 +88,21 @@ const popups = [
   }
 ];
 
+function Hero() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [popup, setPopup] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const timeoutRef = useRef(null);
+
+  const { ref: heroRef, inView: heroInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
+
+  const { ref: popupRef, inView: popupInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
 
   useEffect(() => {
     timeoutRef.current = setInterval(() => {
@@ -130,18 +122,18 @@ const popups = [
     }, 5000);
 
     return () => clearInterval(randomPopupInterval);
-  }, []);
+  }, [showPopup]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
+      if (heroRef.current && !heroRef.current.contains(event.target)) {
         setShowPopup(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [popupRef]);
+  }, [heroRef]);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
@@ -152,7 +144,7 @@ const popups = [
   };
 
   return (
-    <SanSarif>
+    <SanSarif className="relative w-full h-[93vh] md:h-[100vh] overflow-hidden">
       <img
         src={images[currentIndex].src}
         className="absolute inset-0 w-full h-full object-cover"
@@ -161,7 +153,7 @@ const popups = [
       <motion.div
         ref={heroRef}
         initial={{ y: -30, opacity: 0 }}
-        animate={{ y: heroInView ? 0 : 50, opacity: heroInView ? 1 : 0 }}
+        animate={{ y: heroInView ? 0 : 100, opacity: heroInView ? 1 : 0 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70 p-6 text-center"
       >
