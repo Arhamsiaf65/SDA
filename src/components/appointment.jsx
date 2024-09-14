@@ -14,19 +14,20 @@ function Appointment() {
     event.preventDefault();
     toast.success('Appointment booked successfully!', {
       position: "top-right",
-      autoClose: 2000, // Duration in milliseconds
+      autoClose: 1000, 
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       theme: "dark",
-      transition: "bounce",
+      transition: "bounce", 
     });
   };
+  
 
   return (
     <div>
-      <ToastContainer
+       <ToastContainer
         position="top-right"
         autoClose={2000}
         hideProgressBar={true}
@@ -74,7 +75,6 @@ function Appointment() {
                   className="block w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-600 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                   required
                 >
-                  <option value="">Please select</option>
                   <option value="consultation">Consultation</option>
                   <option value="checkup">Checkup</option>
                   <option value="followup">Follow-up</option>
@@ -85,7 +85,6 @@ function Appointment() {
                   className="block w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-600 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                   required
                 >
-                  <option value="">Select time slot</option>
                   <option value="09:00">09:00 AM</option>
                   <option value="10:00">10:00 AM</option>
                   <option value="11:00">11:00 AM</option>
