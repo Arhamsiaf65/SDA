@@ -105,7 +105,7 @@ function NavBar() {
                                 to="home"
                                 onClick={() => setIsOpen(false)}
                                 smooth={true}
-                                duration={500}
+                                duration={1000}
                                 className="block py-2 px-4 text-lg font-bold text-gray-800 md:text-white hover:text-[#076e6d] rounded transition-transform hover:scale-105 md:bg-transparent md:p-0 duration-300 ease-in-out transform"
                             >
                                 Home
@@ -116,7 +116,7 @@ function NavBar() {
                                 to="services"
                                 onClick={() => setIsOpen(false)}
                                 smooth={true}
-                                duration={500}
+                                duration={1000}
                                 className="block py-2 px-4 text-lg font-bold text-gray-800 md:text-white hover:text-[#076e6d] rounded transition-transform hover:scale-105 md:bg-transparent md:p-0 duration-300 ease-in-out transform"
                             >
                                 Services
@@ -127,7 +127,7 @@ function NavBar() {
                                 to="consultation"
                                 onClick={() => setIsOpen(false)}
                                 smooth={true}
-                                duration={500}
+                                duration={1000}
                                 className="block py-2 px-4 text-lg font-bold text-gray-800 md:text-white hover:text-[#076e6d] rounded transition-transform hover:scale-105 md:bg-transparent md:p-0 duration-300 ease-in-out transform"
                             >
                                 Consultation
@@ -138,7 +138,7 @@ function NavBar() {
                                 to="team"
                                 onClick={() => setIsOpen(false)}
                                 smooth={true}
-                                duration={500}
+                                duration={1000}
                                 className="block py-2 px-4 text-lg font-bold text-gray-800 md:text-white hover:text-[#076e6d] rounded transition-transform hover:scale-105 md:bg-transparent md:p-0 duration-300 ease-in-out transform"
                             >
                                 Team
@@ -149,7 +149,7 @@ function NavBar() {
                                 to="book-appointment"
                                 onClick={() => setIsOpen(false)}
                                 smooth={true}
-                                duration={700}
+                                duration={1500}
                                 className="block py-2 px-4 text-lg font-bold text-gray-800 md:text-white hover:text-[#076e6d] rounded transition-transform hover:scale-105 md:bg-transparent md:p-0 duration-300 ease-in-out transform"
                             >
                                 Appointment
