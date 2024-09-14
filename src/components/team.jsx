@@ -52,9 +52,7 @@ function Team() {
     };
 
     return (
-        <motion.div initial={{ x: -50, opacity: 0 }}
-            animate={{ x: isVisible ? 0 : 80, opacity: isVisible ? 1 : 0 }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
+        <div 
             ref={sectionRef}>
             <section className="py-24 bg-gray-50">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -117,7 +115,7 @@ function Team() {
                     </div>
                 </div>
             </section>
-        </motion.div>
+        </div>
     );
 }
 
