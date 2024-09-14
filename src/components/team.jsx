@@ -52,15 +52,16 @@ function Team() {
     };
 
     return (
-        <div ref={sectionRef}>
+        <motion.div initial={{ x: -50, opacity: 0 }}
+            animate={{ x: isVisible ? 0 : 50, opacity: isVisible ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: 'easeOut' }}
+            ref={sectionRef}>
             <section className="py-24 bg-gray-50">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col lg:flex-row items-center lg:items-start md:mt-20">
-                        <motion.div
+                        <div
                             className="w-full lg:w-1/2 mb-12 lg:mb-0"
-                            initial={{ x: -50, opacity: 0 }} 
-                            animate={{ x: isVisible ? 0 : -50, opacity: isVisible ? 1 : 0 }} 
-                            transition={{ duration: 1.2, ease: 'easeOut' }} 
+
                         >
                             <h2 className="font-manrope text-5xl text-gray-900 font-bold leading-[4rem] mb-7 text-center lg:text-left">
                                 Our Leading, Strong & Creative Team
@@ -74,7 +75,7 @@ function Team() {
                             <button className="py-3 px-8 w-60 bg-[#177D6B] text-white text-base font-semibold transition-transform duration-500 hover:scale-105 block text-center rounded-full mx-auto lg:mx-0">
                                 Join Our Team
                             </button>
-                        </motion.div>
+                        </div>
 
                         <motion.div className="grid grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3 gap-8">
                             {[
@@ -116,7 +117,7 @@ function Team() {
                     </div>
                 </div>
             </section>
-        </div>
+        </motion.div>
     );
 }
 
