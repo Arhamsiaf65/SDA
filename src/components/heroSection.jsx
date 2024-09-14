@@ -11,6 +11,7 @@ const SanSarif = styled.div`
     font-style: normal;
 `;
 
+
 function HeroSection() {
     const heading = "Free Consultations";
     const text = "At Doctors Corner, we offer top-notch medical care tailored to your individual needs. Our expert team is here to provide everything from routine check-ups to advanced treatments. Discover how our personalized approach can help you achieve better health. Book a free consultation today and start your journey to wellness with us.";
@@ -62,6 +63,8 @@ function HeroSection() {
                     </button>
                 </motion.div>
             </div>
+
+           
         </div>
     );
 }

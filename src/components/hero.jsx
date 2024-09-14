@@ -28,20 +28,29 @@ const Popup = styled(motion.div)`
   margin-bottom: 10px;
 `;
 
-const InfoIcon = styled(FaInfoCircle)`
-  position: absolute;
-  bottom: 90px;
-  left: 0px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  background: white;
-  border-radius: 50%;
-  transition: color 0.3s ease;
-  &:hover {
-    color: #00B4A1;
-  }
+const WhatsAppIcon = styled.a`
+    position: fixed;
+    bottom: 16px; 
+    left: 16px; 
+    z-index: 1000; 
+    background-color: white; 
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #128C7E;
+    }
+
+    img {
+        width: 40px; 
+        height: 40px;
+    }
 `;
+
+
+
 
 const images = [
   {
@@ -197,6 +206,9 @@ function Hero() {
           </Popup>
         )}
       </PopupContainer>
+      <WhatsAppIcon href="https://wa.me/03091849279" target="_blank" rel="noopener noreferrer">
+                <img src="https://static-00.iconduck.com/assets.00/whatsapp-icon-2038x2048-5zk5gj1j.png" alt="" />
+            </WhatsAppIcon>
     </SanSarif>
   );
 }
