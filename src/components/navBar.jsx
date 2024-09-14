@@ -149,7 +149,7 @@ function NavBar() {
                                 to="book-appointment"
                                 onClick={() => setIsOpen(false)}
                                 smooth={true}
-                                duration={1500}
+                                duration={500}
                                 className="block py-2 px-4 text-lg font-bold text-gray-800 md:text-white hover:text-[#076e6d] rounded transition-transform hover:scale-105 md:bg-transparent md:p-0 duration-300 ease-in-out transform"
                             >
                                 Appointment
