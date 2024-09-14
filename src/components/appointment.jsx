@@ -14,20 +14,18 @@ function Appointment() {
     event.preventDefault();
     toast.success('Appointment booked successfully!', {
       position: "top-right",
-      autoClose: 1000, 
+      autoClose: 2000, 
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       theme: "dark",
-      transition: "bounce", 
     });
   };
-  
 
   return (
     <div>
-       <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={2000}
         hideProgressBar={true}
@@ -35,7 +33,6 @@ function Appointment() {
         pauseOnHover
         draggable
         theme="dark"
-        transition="bounce"
       />
       <motion.div
         ref={ref}
