@@ -13,20 +13,28 @@ const SanSarif = styled.div`
 const ActionLineContainer = styled.div`
   position: absolute;
   bottom: 2rem; /* Adjust based on your needs */
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  transform: translateX(0);
   display: flex;
   align-items: center;
   z-index: 100;
   width: 80%; /* Make it responsive */
   max-width: 500px; /* Limit max width for larger screens */
+
+  @media (min-width: 768px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const Line = styled.div`
   height: 2px;
-  width: 100%; 
+  width: 100%;
   background-color: #098487;
   position: relative;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ActionIcon = styled.a`
@@ -38,7 +46,7 @@ const ActionIcon = styled.a`
   padding: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,7 +183,7 @@ function Hero() {
         </ActionIconPhone>
       </ActionLineContainer>
 
-      <div className="absolute bottom-5 right-3 md:right-5 flex  space-x-60  md:space-x-7">
+      <div className="absolute bottom-5 w-full flex justify-end space-x-5 mr-4 md:mr-10 md:justify-between md:px-16">
         <button onClick={handlePrev} className="text-white text-lg md:text-xl lg:text-2xl shadow-md transition-transform transform hover:scale-105">
           <i className="fas fa-chevron-left"></i>
         </button>
