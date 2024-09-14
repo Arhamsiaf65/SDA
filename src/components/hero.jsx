@@ -12,7 +12,7 @@ const SanSarif = styled.div`
 
 const ActionLineContainer = styled.div`
   position: absolute;
-  bottom: 2rem; /* Adjust based on your needs */
+  bottom: 4rem; /* Adjust based on your needs */
   left: 0;
   transform: translateX(0);
   display: flex;
@@ -183,7 +183,7 @@ function Hero() {
         </ActionIconPhone>
       </ActionLineContainer>
 
-      <div className="absolute bottom-5 w-full flex justify-end space-x-5 mr-4 md:mr-10 md:justify-between md:px-16">
+      <div className="absolute bottom-12 w-full flex justify-end space-x-5 pr-5 md:mr-10 md:justify-between md:px-16">
         <button onClick={handlePrev} className="text-white text-lg md:text-xl lg:text-2xl shadow-md transition-transform transform hover:scale-105">
           <i className="fas fa-chevron-left"></i>
         </button>
